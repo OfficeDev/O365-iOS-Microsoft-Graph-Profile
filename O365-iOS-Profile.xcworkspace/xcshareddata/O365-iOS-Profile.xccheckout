@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>ED3E22BA-CF42-43F6-B022-FDA0E7F001E4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>O365-iOS-Profile</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1245EA29E5A0E4EB53B71ACDF88A170236818090</key>
+		<string>https://onemseng.visualstudio.com/DefaultCollection/Office%2520365%2520Patterns%2520and%2520Solutions/_git/O365-iOS-Profile</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>O365-iOS-Profile/O365-iOS-Profile.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1245EA29E5A0E4EB53B71ACDF88A170236818090</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://onemseng.visualstudio.com/DefaultCollection/Office%2520365%2520Patterns%2520and%2520Solutions/_git/O365-iOS-Profile</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1245EA29E5A0E4EB53B71ACDF88A170236818090</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1245EA29E5A0E4EB53B71ACDF88A170236818090</string>
+			<key>IDESourceControlWCCName</key>
+			<string>O365-iOS-Profile</string>
+		</dict>
+	</array>
+</dict>
+</plist>
