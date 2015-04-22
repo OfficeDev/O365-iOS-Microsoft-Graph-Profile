@@ -9,7 +9,7 @@
 // these when you register your application in Azure AD.
 static NSString * const REDIRECT_URL_STRING = @"ENTER_REDIRECT_URI_HERE";
 static NSString * const CLIENT_ID           = @"ENTER_CLIENT_ID_HERE";
-static NSString * const AUTHORITY           = @"https://login.windows.net/common";
+static NSString * const AUTHORITY           = @"https://login.microsoftonline.com/common";
 
 
 @interface AuthenticationManager ()

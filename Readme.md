@@ -83,9 +83,11 @@ Browse the **O365-iOS-Profile** project directory and open up the workspace (O36
 
 // You will set your application's clientId and redirect URI. You get
 // these when you register your application in Azure AD.
+
 static NSString * const REDIRECT_URL_STRING = @"ENTER_REDIRECT_URI_HERE";
+
 static NSString * const CLIENT_ID           = @"ENTER_CLIENT_ID_HERE";
-static NSString * const AUTHORITY           = @"https://login.microsoftonline.com/common";
+
 
 Next enter the other constants in the files.
 
