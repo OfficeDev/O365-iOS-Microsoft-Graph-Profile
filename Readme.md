@@ -32,7 +32,7 @@ Once you have an Office 365 account, an Azure AD account that is bound to your O
 
 1. Register your application with Microsoft Azure, and configure the appropriate Office 365 Exchange Online permissions. We'll show you how to do this later.
 2. Install and use CocoaPods to get the Office 365 and ADAL authentication dependencies into your project. We'll show you how to do this later.
-3. Enter the Azure app registration specifics (ClientID and RedirectUri) into the Email Peel app.
+3. Enter the Azure app registration specifics (ClientID and RedirectUri) into the project in XCode.
 
 ## Use CocoaPods to import the O365 iOS SDK
 Note: If you've never used **CocoaPods** before as a dependency manager you'll have to install it prior to getting your Office 365 iOS SDK dependencies into your project. 
@@ -70,7 +70,7 @@ Note: You should receive confirmation that these dependencies have been added to
 7.	Click the arrow icon on the lower-right corner of the page.
 8.	On the Application information page, specify a Redirect URI, for this example, you can specify http://localhost/connect, and then click the check box in the lower-right hand corner of the page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
 9.	Once the application has been successfully added, you will be taken to the Quick Start page for the application. From here, click Configure in the top menu.
-10.	Under **permissions to other applications**, add the following permission: **Read Graph data**.
+10.	Under **permissions to other applications**, select **Office 365 unified API (preview)** and add the following permission: **Read all user's basic profiles**.
 13.	Copy the value specified for **Client ID** on the **Configure** page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
 14.	Click **Save** in the bottom menu.
 
