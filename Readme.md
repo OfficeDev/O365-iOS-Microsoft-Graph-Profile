@@ -7,7 +7,7 @@ This sample uses the Office 365 unified endpoint (preview) to fetch the user dir
 * [Set up your environment](#set-up-your-environment)
 * [Use CocoaPods to import the O365 iOS SDK](#use-cocoapods-to-import-the-o365-ios-sdk)
 * [Register your app with Microsoft Azure](#register-your-app-with-microsoft-azure)
-* [Get the Client ID and Redirect Uri into the project](#get-the-client-id-and-redirect-uri-into-the-project)
+* [Get the Client ID and Redirect Uri and other constants into the project](#get-the-client-id-and-redirect-uri-into-the-project)
 * [Important Code Files](#code-files)
 * [Questions and comments](#questions-and-comments)
 * [Additional resources](#additional-resources)
@@ -30,7 +30,7 @@ To run the Office 365 Profile sample, you need the following:
 
 Once you have an Office 365 account and an Azure AD account that is bound to your Office 365 Developer site, you'll need to perform the following steps:
 
-1. Register your application with Azure, and configure the appropriate Office 365 Exchange Online permissions. 
+1. Register your application with Azure, and configure the appropriate Office 365 permissions. 
 2. Install and use CocoaPods to get the Office 365 and ADAL authentication dependencies into your project.
 3. Enter the Azure app registration specifics (ClientID and RedirectUri) and other constants into the project in XCode.
 
@@ -70,7 +70,7 @@ Note: You should receive confirmation that these dependencies have been added to
 7.	Select the arrow icon on the lower-right corner of the page.
 8.	On the Application information page, specify a Redirect URI, for this example, you can specify http://localhost/connect, and then select the check box in the lower-right hand corner of the page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
 9.	Once the application has been successfully added, you will be taken to the quick start page for the application. Select Configure in the top menu.
-10.	Under **permissions to other applications**, select **Office 365 unified API (preview)** and add the following permission: **Read all user's basic profiles**.
+10.	Under **permissions to other applications**, select Office 365 unified API (preview) and add the following permission: **Read all user's basic profiles**.
 11.	Copy the value specified for **Client ID** on the **Configure** page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
 12.	Select **Save** in the bottom menu.
 
