@@ -126,6 +126,8 @@ Questions about Office 365 development in general should be posted to [Stack Ove
 
 ## Additional resources
 
+* [Office 365 Connect app for iOS](https://github.com/OfficeDev/O365-iOS-Connect)
+* [Office 365 Code Snippets for iOS](https://github.com/OfficeDev/O365-iOS-Snippets)
 * [Office 365 APIs documentation](http://msdn.microsoft.com/office/office365/howto/platform-development-overview)
 * [Office Dev Center](http://dev.office.com/)
 
