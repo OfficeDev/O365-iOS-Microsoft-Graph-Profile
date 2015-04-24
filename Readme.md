@@ -8,7 +8,7 @@ This sample uses the Office 365 unified endpoint (preview) to fetch the user dir
 * [Use CocoaPods to import the O365 iOS SDK](#use-cocoapods-to-import-the-o365-ios-sdk)
 * [Register your app with Microsoft Azure](#register-your-app-with-microsoft-azure)
 * [Get the Client ID and Redirect Uri into the project](#get-the-client-id-and-redirect-uri-into-the-project)
-* [Code of Interest](#code-of-interest)
+* [Important Code Files](#code-files)
 * [Questions and comments](#questions-and-comments)
 * [Additional resources](#additional-resources)
 
@@ -31,7 +31,7 @@ To run the Office 365 Profile sample, you need the following:
 Once you have an Office 365 account and an Azure AD account that is bound to your Office 365 Developer site, you'll need to perform the following steps:
 
 1. Register your application with Azure, and configure the appropriate Office 365 Exchange Online permissions. 
-2. Install and use CocoaPods to get the Office 365 and ADAL authentication dependencies into your project. .
+2. Install and use CocoaPods to get the Office 365 and ADAL authentication dependencies into your project.
 3. Enter the Azure app registration specifics (ClientID and RedirectUri) and other constants into the project in XCode.
 
 ## Use CocoaPods to import the O365 iOS SDK
@@ -98,7 +98,7 @@ In AllUsersViewController, enter your friendly organization name. This will be d
 static NSString * const ORGANIZATION_NAME           = @"ENTER_YOUR_ORG_NAME_HERE";
 
 
-## Important code files
+## Important Code Files
 
 
 **Models**
