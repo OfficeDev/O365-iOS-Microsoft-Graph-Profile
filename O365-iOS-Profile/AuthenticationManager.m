@@ -75,6 +75,8 @@ static NSString * const AUTHORITY           = @"https://login.microsoftonline.co
                                        
                                        NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
                                        [errorDetail setValue:@"Failed to acquire a token" forKey:NSLocalizedDescriptionKey];
+                                       
+                                       //let's pick a unique error code of 100
                                        NSError *error = [NSError errorWithDomain:@"O365-iOS-Profile"
                                                                             code:100 userInfo:errorDetail];
                                 

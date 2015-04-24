@@ -43,8 +43,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 }
 
 //Fetches all the users from the Active Directory
-- (void)fetchAllUsersWithCompletionHandler:(void (^)(NSArray *, NSError *))completionHandler
-{
+- (void)fetchAllUsersWithCompletionHandler:(void (^)(NSArray *, NSError *)) completionHandler {
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
     
     //[authenticationManager clearCredentials];
@@ -95,15 +94,15 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
                                                                         for (NSDictionary *userData in jsonPayload[@"value"]) {
                                                                             
-                                                                            NSString *id;
+                                                                            NSString *objectId;
                                                                             
                                                                             if(userData[@"objectId"])
                                                                             {
-                                                                                id = userData[@"objectId"];
+                                                                                objectId = userData[@"objectId"];
                                                                             }
                                                                             else
                                                                             {
-                                                                                id = @"";
+                                                                                objectId = @"";
                                                                             }
                                                                             
                                                                             NSString *displayName;
@@ -128,9 +127,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                                 jobTitle = @"";
                                                                             }
                                                                             
-                                                                            User *user = [[User alloc] initWithId:id
-                                                                                                                              displayName:displayName
-                                                                                                                                 jobTitle:jobTitle];
+                                                                            User *user = [[User alloc] initWithId:objectId
+                                                                                                            displayName:displayName
+                                                                                                            jobTitle:jobTitle];
                                                                             [users addObject:user];
                                                                             
                                                                         }
@@ -145,8 +144,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 //Fetches the basic user information from Active Directory
 - (void)fetchBasicUserInfoForUserId:(NSString *)userObjectID
-             completionHandler:(void (^)(BasicUserInfo *, NSError *))completionHandler
-{
+                  completionHandler:(void (^)(BasicUserInfo *, NSError *))completionHandler {
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
     
     //[authenticationManager clearCredentials];
@@ -193,15 +191,15 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                                                                                     options:0
                                                                                                                                       error:NULL];
                                                                         
-                                                                        NSString *id;
+                                                                        NSString *objectId;
                                                                         
                                                                         if(jsonPayload[@"objectId"])
                                                                         {
-                                                                            id = jsonPayload[@"objectId"];
+                                                                            objectId = jsonPayload[@"objectId"];
                                                                         }
                                                                         else
                                                                         {
-                                                                            id = @"";
+                                                                            objectId = @"";
                                                                         }
                                                                         
                                                                         NSString *displayName;
@@ -283,7 +281,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                
                                                                         
 
-                                                                        BasicUserInfo *basicUserInfo = [[BasicUserInfo alloc] initWithId:id
+                                                                        BasicUserInfo *basicUserInfo = [[BasicUserInfo alloc] initWithId:objectId
                                                                                         displayName:displayName
                                                                                                                                     state:state
                                                                                                                                  country:country
@@ -516,15 +514,15 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
                                                                         
                                                                         
-                                                                        NSString *id;
+                                                                        NSString *objectId;
                                                                         
                                                                         if(jsonPayload[@"objectId"] && jsonPayload[@"displayName"] != [NSNull null])
                                                                         {
-                                                                            id = jsonPayload[@"objectId"];
+                                                                            objectId = jsonPayload[@"objectId"];
                                                                         }
                                                                         else
                                                                         {
-                                                                            id = @"";
+                                                                            objectId = @"";
                                                                         }
                                                                         
                                                                         NSString *displayName;
@@ -550,7 +548,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         }
                                                                         
                                                                         
-                                                                        ManagerInfo *managerInfo = [[ManagerInfo alloc] initWithId:id
+                                                                        ManagerInfo *managerInfo = [[ManagerInfo alloc] initWithId:objectId
                                                                                                                              displayName:displayName
                                                                                                                                 jobTitle:jobTitle];
                                                                         
@@ -614,15 +612,15 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                             
                                                                         for (NSDictionary *directReportData in jsonPayload[@"value"]) {
                                                                             
-                                                                            NSString *id;
+                                                                            NSString *objectId;
                                                                             
                                                                             if(directReportData[@"objectId"] && directReportData[@"objectId"] != [NSNull null])
                                                                             {
-                                                                                id = directReportData[@"objectId"];
+                                                                                objectId = directReportData[@"objectId"];
                                                                             }
                                                                             else
                                                                             {
-                                                                                id = @"";
+                                                                                objectId = @"";
                                                                             }
                                                                             
                                                                             NSString *displayName;
@@ -647,7 +645,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                                 jobTitle = @"";
                                                                             }
                                                                             
-                                                                            DirectReport *directReport = [[DirectReport alloc] initWithId:id
+                                                                            DirectReport *directReport = [[DirectReport alloc] initWithId:objectId
                                                                                                                       displayName:displayName
                                                                                                                          jobTitle:jobTitle];
                                                                             [directReports addObject:directReport];
@@ -716,15 +714,15 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
                                                                         for (NSDictionary *membershipGroupData in jsonPayload[@"value"]) {
                                                                             
-                                                                            NSString *id;
+                                                                            NSString *objectId;
                                                                             
                                                                             if(membershipGroupData[@"objectId"] && membershipGroupData[@"objectId"] != [NSNull null])
                                                                             {
-                                                                                id = membershipGroupData[@"objectId"];
+                                                                                objectId = membershipGroupData[@"objectId"];
                                                                             }
                                                                             else
                                                                             {
-                                                                                id = @"";
+                                                                                objectId = @"";
                                                                             }
                                                                             
                                                                             NSString *groupName;
@@ -737,7 +735,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                             {
                                                                                 groupName = @"";
                                                                             }
-                                                                            MembershipGroup *membershipGroup = [[MembershipGroup alloc] initWithId:id
+                                                                            MembershipGroup *membershipGroup = [[MembershipGroup alloc] initWithId:objectId
                                                                                                                               groupName:groupName];
                                                                             [membershipGroups addObject:membershipGroup];
                                                                             
@@ -806,15 +804,15 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
                                                                         for (NSDictionary *filesData in jsonPayload[@"value"]) {
                                                                             
-                                                                            NSString *id;
+                                                                            NSString *objectId;
                                                                             
                                                                             if(filesData[@"id"] && filesData[@"id"] != [NSNull null])
                                                                             {
-                                                                                id = filesData[@"id"];
+                                                                                objectId = filesData[@"id"];
                                                                             }
                                                                             else
                                                                             {
-                                                                                id = @"";
+                                                                                objectId = @"";
                                                                             }
                                                                             
                                                                             NSString *fileName;
@@ -853,7 +851,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                                 modifiedByDisplayName = @"";
                                                                             }
                                                                             
-                                                                            File *file = [[File alloc] initWithId:id
+                                                                            File *file = [[File alloc] initWithId:objectId
                                                                                                          fileName:fileName
                                                                                                          lastModifiedByObjectID:modifiedByObjectId
                                                                                                          lastModifiedByDisplayName:modifiedByDisplayName];

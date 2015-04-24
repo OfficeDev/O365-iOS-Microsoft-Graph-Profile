@@ -106,10 +106,6 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
 }
 
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 600;
-//}
-
 - (void)fetchUserThumbnail
 {
     [self.unifiedEndpointClient fetchThumbnailForUserId:self.user.objectId
