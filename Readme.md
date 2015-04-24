@@ -131,3 +131,5 @@ Questions about Office 365 development in general should be posted to [Stack Ove
 * [Office 365 APIs documentation](http://msdn.microsoft.com/office/office365/howto/platform-development-overview)
 * [Office Dev Center](http://dev.office.com/)
 
+## Copyright
+Copyright (c) 2015 Microsoft. All rights reserved.
