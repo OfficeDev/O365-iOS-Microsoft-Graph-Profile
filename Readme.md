@@ -1,3 +1,4 @@
+
 #Office 365 Profile Sample for iOS#
 
 This sample uses the Office 365 unified endpoint (preview) to fetch the user directory and user profile data from various services like Active Directory, SharePoint, and OneDrive, and then displays them in a simple user interface.
@@ -70,7 +71,7 @@ Note: You should receive confirmation that these dependencies have been added to
 7.	Select the arrow icon on the lower-right corner of the page.
 8.	On the Application information page, specify a Redirect URI, for this example, you can specify http://localhost/connect, and then select the check box in the lower-right hand corner of the page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
 9.	Once the application has been successfully added, you will be taken to the quick start page for the application. Select Configure in the top menu.
-10.	Under **permissions to other applications**, select Office 365 unified API (preview) and add the following permission: **Read all user's basic profiles**.
+10.	Under **permissions to other applications**, select Office 365 unified API (preview) and add the following permissions: **Read all user's basic profiles**, **Read user's files** and **Read items in all site collections**.
 11.	Copy the value specified for **Client ID** on the **Configure** page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
 12.	Select **Save** in the bottom menu.
 
