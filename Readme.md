@@ -69,7 +69,7 @@ Note: You should receive confirmation that these dependencies have been added to
 5.	On the **What do you want to do** page, select **Add an application my organization is developing**.
 6.	On the **Tell us about your application** page, specify **O365-iOS-Profile** for the application name and select **NATIVE CLIENT APPLICATION** for type.
 7.	Select the arrow icon on the lower-right corner of the page.
-8.	On the Application information page, specify a Redirect URI, for this example, you can specify http://localhost/connect, and then select the check box in the lower-right hand corner of the page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
+8.	On the Application information page, specify a Redirect URI, for this example, you can specify http://localhost/o365iosprofile, and then select the check box in the lower-right hand corner of the page. Remember this value for the section **Get the ClientID and RedirectUri into the project**.
 9.	Once the application has been successfully added, you will be taken to the quick start page for the application. Select Configure in the top menu.
 10.	Under **permissions to other applications**, select Office 365 unified API (preview) and add the following permissions: **Read all user's basic profiles**, **Read user's files** and **Read items in all site collections**.
 11.	Copy the value specified for **Client ID** on the **Configure** page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
