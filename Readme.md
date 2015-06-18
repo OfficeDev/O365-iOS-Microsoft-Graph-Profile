@@ -132,6 +132,7 @@ Questions about Office 365 development in general should be posted to [Stack Ove
 * [Email Peek - An iOS app built using Office 365](https://github.com/OfficeDev/O365-iOS-EmailPeek)
 * [Office 365 APIs documentation](http://msdn.microsoft.com/office/office365/howto/platform-development-overview)
 * [Office Dev Center](http://dev.office.com/)
+* [Office 365 API code samples and videos](https://msdn.microsoft.com/office/office365/howto/starter-projects-and-code-samples)
 
 ## Copyright
 Copyright (c) 2015 Microsoft. All rights reserved.
