@@ -130,6 +130,7 @@ Questions about Office 365 development in general should be posted to [Stack Ove
 * [Office 365 Connect app for iOS](https://github.com/OfficeDev/O365-iOS-Connect)
 * [Office 365 Code Snippets for iOS](https://github.com/OfficeDev/O365-iOS-Snippets)
 * [Email Peek - An iOS app built using Office 365](https://github.com/OfficeDev/O365-iOS-EmailPeek)
+* [Other Office 365 Profile samples](https://github.com/OfficeDev?utf8=%E2%9C%93&query=Profile)
 * [Office 365 APIs documentation](http://msdn.microsoft.com/office/office365/howto/platform-development-overview)
 * [Office Dev Center](http://dev.office.com/)
 * [Office 365 API code samples and videos](https://msdn.microsoft.com/office/office365/howto/starter-projects-and-code-samples)
