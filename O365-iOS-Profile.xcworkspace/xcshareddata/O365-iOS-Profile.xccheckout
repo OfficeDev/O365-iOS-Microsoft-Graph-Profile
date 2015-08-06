@@ -10,29 +10,29 @@
 	<string>O365-iOS-Profile</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1245EA29E5A0E4EB53B71ACDF88A170236818090</key>
-		<string>https://onemseng.visualstudio.com/DefaultCollection/Office%2520365%2520Patterns%2520and%2520Solutions/_git/O365-iOS-Profile</string>
+		<key>EB33741F34F48550B695DEAED2373143B5E63A88</key>
+		<string>https://github.com/OfficeDev/O365-iOS-Profile.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>O365-iOS-Profile/O365-iOS-Profile.xcworkspace</string>
+	<string>O365-iOS-Profile.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1245EA29E5A0E4EB53B71ACDF88A170236818090</key>
-		<string>../..</string>
+		<key>EB33741F34F48550B695DEAED2373143B5E63A88</key>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://onemseng.visualstudio.com/DefaultCollection/Office%2520365%2520Patterns%2520and%2520Solutions/_git/O365-iOS-Profile</string>
+	<string>https://github.com/OfficeDev/O365-iOS-Profile.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1245EA29E5A0E4EB53B71ACDF88A170236818090</string>
+	<string>EB33741F34F48550B695DEAED2373143B5E63A88</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1245EA29E5A0E4EB53B71ACDF88A170236818090</string>
+			<string>EB33741F34F48550B695DEAED2373143B5E63A88</string>
 			<key>IDESourceControlWCCName</key>
 			<string>O365-iOS-Profile</string>
 		</dict>

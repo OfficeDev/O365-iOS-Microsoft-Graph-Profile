@@ -1,5 +1,6 @@
 
 #Office 365 Profile Sample for iOS#
+[![Build Status](https://travis-ci.org/OfficeDev/O365-iOS-Profile.svg)](https://travis-ci.org/OfficeDev/O365-iOS-Profile)
 
 This sample uses the Office 365 unified endpoint (preview) to fetch the user directory and user profile data from various services like Active Directory, SharePoint, and OneDrive, and then displays them in a simple user interface.
 
