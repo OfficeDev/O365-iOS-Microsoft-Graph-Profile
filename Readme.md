@@ -96,9 +96,6 @@ Next enter the other constants in the files.
 In O365UnifiedEndpointOperations, enter your tenant name, such as x.onmicrosoft.com.
 static NSString * const TENANT_STRING = @"ENTER_YOUR-TENANT_NAME_HERE/";
 
-In AllUsersViewController, enter your friendly organization name. This will be displayed as the title.
-static NSString * const ORGANIZATION_NAME           = @"ENTER_YOUR_ORG_NAME_HERE";
-
 
 ## Important Code Files
 

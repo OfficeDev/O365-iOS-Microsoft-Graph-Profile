@@ -8,17 +8,15 @@
 #import "DirectReport.h"
 #import "User.h"
 #import "MembershipGroup.h"
-#import "File.h"
 #import "AuthenticationManager.h"
 
 
 //ENTER: Update this constant with your tenant name, usually this looks like constoso.onmicrosoft.com/
 //DO NOT FORGET END THE STRING WITH A '/'
-static NSString * const TENANT_STRING = @"ENTER_YOUR-TENANT_NAME_HERE/";
-
+static NSString * const TENANT_STRING = @"ENTER_YOUR_TENANT_NAME_HERE/";
 
 //These are the other standard URL strings needed for the unified endpoint
-static NSString * const BASE_URL_STRING = @"https://graph.microsoft.com/beta/";
+static NSString * const BASE_URL_STRING = @"https://graph.microsoft.com/v1.0/";
 static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 @interface O365UnifiedEndpointOperations ()
@@ -44,9 +42,8 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 //Fetches all the users from the Active Directory
 - (void)fetchAllUsersWithCompletionHandler:(void (^)(NSArray *, NSError *)) completionHandler {
-    AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
     
-    //[authenticationManager clearCredentials];
+    AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
     
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
                                         completionHandler:^(ADAuthenticationResult *result, NSError *error) {
@@ -79,13 +76,12 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             [[delegateFreeSession dataTaskWithRequest:theRequest
                                                                     completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                         NSError *error) {
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                              [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
                                                                         
-                                                                        
+                                                                        if (error) {
+                                                                            completionHandler(nil,error);
+                                                                            return;
+                                                                        }
+
                                                                         NSDictionary *jsonPayload = [NSJSONSerialization JSONObjectWithData:data
                                                                                                                                     options:0
                                                                                                                                       error:NULL];
@@ -145,10 +141,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 //Fetches the basic user information from Active Directory
 - (void)fetchBasicUserInfoForUserId:(NSString *)userObjectID
                   completionHandler:(void (^)(BasicUserInfo *, NSError *))completionHandler {
+    
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
     
-    //[authenticationManager clearCredentials];
-
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
                                         completionHandler:^(ADAuthenticationResult *result, NSError *error) {
                                             if (error) {
@@ -180,12 +175,10 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             [[delegateFreeSession dataTaskWithRequest:theRequest
                                                                     completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                         NSError *error) {
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                              [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
-
+                                                                        if (error) {
+                                                                            completionHandler(nil,error);
+                                                                            return;
+                                                                        }
 
                                                                         NSDictionary *jsonPayload = [NSJSONSerialization JSONObjectWithData:data
                                                                                                                                     options:0
@@ -302,8 +295,6 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                 completionHandler:(void (^)(UIImage *image, NSError *error))completionHandler
 {
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
-    
-    //[authenticationManager clearCredentials];
 
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
                                         completionHandler:^(ADAuthenticationResult *result, NSError *error) {
@@ -312,14 +303,13 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                 return;
                                             }
 
-
                                             NSString *accessToken = result.tokenCacheStoreItem.accessToken;
 
                                             NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
                                             NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration:
                                                                                  config delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
 
-                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@%@", _baseURL, @"users/", userObjectID, @"/thumbnailPhoto"];
+                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@%@", _baseURL, @"users/", userObjectID, @"/photo/$value"];
 
                                             NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:requestURL]];
 
@@ -334,16 +324,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                     completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                         NSError *error) {
                                                                         
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                              [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
-
-                                                            
                                                                         UIImage *image = [UIImage imageWithData:data];
-
-
 
                                                                         completionHandler(image, nil);
                                                                     }] resume];
@@ -353,9 +334,8 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 //Fetches the user's hire date from SharePoint
 -(void)fetchHireDateForUserId:(NSString *)userObjectID completionHandler:(void (^)(NSString *, NSError *))completionHandler {
-    AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
     
-    //[authenticationManager clearCredentials];
+    AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
     
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
                                         completionHandler:^(ADAuthenticationResult *result, NSError *error) {
@@ -387,18 +367,12 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             [[delegateFreeSession dataTaskWithRequest:theRequest
                                                                     completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                         NSError *error) {
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                        [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
-                                                                        
                                                                         
                                                                         NSDictionary *jsonPayload = [NSJSONSerialization JSONObjectWithData:data
                                                                                                                                     options:0
                                                                                                                                       error:NULL];
                                                                         
-                                                                        NSString *hireDate = jsonPayload[@"HireDate"];
+                                                                        NSString *hireDate = jsonPayload[@"hireDate"];
                                                                     
                                                                         completionHandler(hireDate, error);
                                                                     }] resume];
@@ -409,9 +383,8 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 //Fetches the user's #tags from SharePoint
 -(void)fetchTagsForUserId:(NSString *)userObjectID completionHandler:(void (^)(NSArray *, NSError *))completionHandler {
+
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
-    
-    //[authenticationManager clearCredentials];
     
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
                                         completionHandler:^(ADAuthenticationResult *result, NSError *error) {
@@ -443,18 +416,12 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             [[delegateFreeSession dataTaskWithRequest:theRequest
                                                                     completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                         NSError *error) {
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                              [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
-                                                                        
-                                                                        
+
                                                                         NSDictionary *jsonPayload = [NSJSONSerialization JSONObjectWithData:data
                                                                                                                                     options:0
                                                                                                                                       error:NULL];
                                                                         
-                                                                        NSArray *tags = jsonPayload[@"Tags"];
+                                                                        NSArray *tags = jsonPayload[@"tags"];
                                                                         
                                                                         completionHandler(tags, error);
                                                                     }] resume];
@@ -466,9 +433,8 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 //Fetches the user's manager info from Active Directory
 -(void)fetchManagerInfoForUserId:(NSString *)userObjectID completionHandler:(void (^)(ManagerInfo *, NSError *))completionHandler {
+
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
-    
-    //[authenticationManager clearCredentials];
     
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
                                         completionHandler:^(ADAuthenticationResult *result, NSError *error) {
@@ -500,20 +466,13 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             [[delegateFreeSession dataTaskWithRequest:theRequest
                                                                     completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                         NSError *error) {
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                              [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
-                                                                        
+                                                                
                                                                         
                                                                         NSDictionary *jsonPayload = [NSJSONSerialization JSONObjectWithData:data
                                                                                                                                     options:0
                                                                                                                                       error:NULL];
                                                                     
-
-                                                                        
-                                                                        
+        
                                                                         NSString *objectId;
                                                                         
                                                                         if(jsonPayload[@"objectId"] && jsonPayload[@"displayName"] != [NSNull null])
@@ -560,13 +519,10 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 //Fetches the user's direct reports from Active Directory
 -(void)fetchDirectReportsForUserId:(NSString *)userObjectID completionHandler:(void (^)(NSArray *, NSError *))completionHandler {
-    
-    
+
     NSMutableArray *directReports = [[NSMutableArray alloc] init];
                               
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
-    
-    //[authenticationManager clearCredentials];
     
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
                                         completionHandler:^(ADAuthenticationResult *result, NSError *error) {
@@ -598,11 +554,10 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             [[delegateFreeSession dataTaskWithRequest:theRequest
                                                                     completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                         NSError *error) {
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                              [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
+                                                                        if (error) {
+                                                                            completionHandler(nil,error);
+                                                                            return;
+                                                                        }
                                                                         
                                                                         
                                                                         NSDictionary *jsonPayload = [NSJSONSerialization JSONObjectWithData:data
@@ -663,12 +618,10 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 //Fetches the user's membership info from Active Directory
 -(void)fetchMembershipInfoForUserId:(NSString *)userObjectID completionHandler:(void (^)(NSArray *, NSError *))completionHandler {
-    
+
     NSMutableArray *membershipGroups = [[NSMutableArray alloc] init];
     
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
-    
-    //[authenticationManager clearCredentials];
     
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
                                         completionHandler:^(ADAuthenticationResult *result, NSError *error) {
@@ -700,13 +653,10 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             [[delegateFreeSession dataTaskWithRequest:theRequest
                                                                     completionHandler:^(NSData *data, NSURLResponse *response,
                                                                                         NSError *error) {
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                              [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
-                                                                        
-                                                                        
+                                                                        if (error) {
+                                                                            completionHandler(nil,error);
+                                                                            return;
+                                                                        }
                                                                         NSDictionary *jsonPayload = [NSJSONSerialization JSONObjectWithData:data
                                                                                                                                     options:0
                                                                                                                                       error:NULL];
@@ -751,124 +701,6 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
     
 }
 
-//Fetches the files that have been shared with the currently logged in user from OneDrive for Business
--(void)fetchFilesForUserId:(NSString *)userObjectID completionHandler:(void (^)(NSArray *, NSError *))completionHandler {
-    NSMutableArray *files = [[NSMutableArray alloc] init];
-    
-    AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
-    
-    //[authenticationManager clearCredentials];
-    
-    [authenticationManager acquireAuthTokenWithResourceId:_resourceID
-                                        completionHandler:^(ADAuthenticationResult *result, NSError *error) {
-                                            if (error) {
-                                                completionHandler(nil,error);
-                                                return;
-                                            }
-                                            
-                                            
-                                            NSString *accessToken = result.tokenCacheStoreItem.accessToken;
-                                            
-                                            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-                                            NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration:
-                                                                                 config delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-                                            
-                                            //NSString *requestURL = [NSString stringWithFormat:@"%@%@", _baseURL, @"me/files"];
-                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@%@", _baseURL, @"users/", userObjectID, @"/files"];
-                                            
-                                            NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:requestURL]];
-                                            
-                                            
-                                            NSString *authorization = [NSString stringWithFormat:@"Bearer %@", accessToken];
-                                            
-                                            
-                                            [theRequest setValue:authorization forHTTPHeaderField:@"Authorization"];
-                                            
-                                            [theRequest setValue:@"application/json;odata.metadata=minimal;odata.streaming=true" forHTTPHeaderField:@"accept"];
-                                            
-                                            
-                                            [[delegateFreeSession dataTaskWithRequest:theRequest
-                                                                    completionHandler:^(NSData *data, NSURLResponse *response,
-                                                                                        NSError *error) {
-                                                                        NSLog(@"Got response %@ with error %@.\n", response,
-                                                                              error);
-                                                                        NSLog(@"DATA:\n%@\nEND DATA\n",
-                                                                              [[NSString alloc] initWithData: data
-                                                                                                    encoding: NSUTF8StringEncoding]);
-                                                                        
-                                                                        
-                                                                        NSDictionary *jsonPayload = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                                                    options:0
-                                                                                                                                      error:NULL];
-                                                                        
-                                                                        
-                                                                        for (NSDictionary *filesData in jsonPayload[@"value"]) {
-                                                                            
-                                                                            NSString *objectId;
-                                                                            
-                                                                            if(filesData[@"id"] && filesData[@"id"] != [NSNull null])
-                                                                            {
-                                                                                objectId = filesData[@"id"];
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                objectId = @"";
-                                                                            }
-                                                                            
-                                                                            NSString *fileName;
-                                                                            
-                                                                            if(filesData[@"name"] && filesData[@"name"] != [NSNull null])
-                                                                            {
-                                                                                fileName = filesData[@"name"];
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                fileName = @"";
-                                                                            }
-                                                                            
-                                                                            NSDictionary *lastModifiedByDict = [[filesData objectForKey:@"lastModifiedBy"] objectForKey:@"user"];
-                                                                            
-                                                                            
-                                                                            NSString *modifiedByObjectId;
-                                                                            NSString *modifiedByDisplayName;
-                                                                            
-                                                                            if(lastModifiedByDict[@"id"] && lastModifiedByDict[@"id"] != [NSNull null])
-                                                                            {
-                                                                                modifiedByObjectId = lastModifiedByDict[@"id"];
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                modifiedByObjectId = @"";
-                                                                            }
-
-                                                                            
-                                                                            if(lastModifiedByDict[@"displayName"] && lastModifiedByDict[@"displayName"] != [NSNull null])
-                                                                            {
-                                                                                modifiedByDisplayName = lastModifiedByDict[@"displayName"];
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                modifiedByDisplayName = @"";
-                                                                            }
-                                                                            
-                                                                            File *file = [[File alloc] initWithId:objectId
-                                                                                                         fileName:fileName
-                                                                                                         lastModifiedByObjectID:modifiedByObjectId
-                                                                                                         lastModifiedByDisplayName:modifiedByDisplayName];
-
-                                                                            [files addObject:file];
-                                                                            
-                                                                        }
-                                                                        
-                                                                        
-                                                                        completionHandler(files, error);
-                                                                    }] resume];
-                                            
-                                        }];
-    
-
-    
-}
 
 @end
 

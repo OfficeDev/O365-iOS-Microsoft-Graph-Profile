@@ -8,7 +8,6 @@
 #import "ManagerInfo.h"
 #import "DirectReport.h"
 #import "MembershipGroup.h"
-#import "File.h"
 
 //This is the main class that talks to the Office 365 unified endpoint via REST calls and gets the data
 @interface O365UnifiedEndpointOperations : NSObject
@@ -17,28 +16,27 @@
 
 
 - (void)fetchBasicUserInfoForUserId:(NSString *)userObjectID
-         completionHandler:(void (^)(BasicUserInfo *, NSError *))completionHandler;
+                  completionHandler:(void (^)(BasicUserInfo *, NSError *))completionHandler;
 
 - (void)fetchThumbnailForUserId:(NSString *)userObjectID
-                completionHandler:(void (^)(UIImage *image, NSError *error))completionHandler;
+              completionHandler:(void (^)(UIImage *image, NSError *error))completionHandler;
 
 - (void)fetchHireDateForUserId:(NSString *)userObjectID
-                completionHandler:(void (^)(NSString *hireDate, NSError *error))completionHandler;
+             completionHandler:(void (^)(NSString *hireDate, NSError *error))completionHandler;
 
 - (void)fetchTagsForUserId:(NSString *)userObjectID
-                completionHandler:(void (^)(NSArray *tags, NSError *error))completionHandler;
+         completionHandler:(void (^)(NSArray *tags, NSError *error))completionHandler;
 
 - (void)fetchManagerInfoForUserId:(NSString *)userObjectID
                 completionHandler:(void (^)(ManagerInfo *managerInfo, NSError *error))completionHandler;
 
 - (void)fetchDirectReportsForUserId:(NSString *)userObjectID
-                completionHandler:(void (^)(NSArray *directReports, NSError *error))completionHandler;
+                  completionHandler:(void (^)(NSArray *directReports, NSError *error))completionHandler;
 
 - (void)fetchMembershipInfoForUserId:(NSString *)userObjectID
-                completionHandler:(void (^)(NSArray *membershipGroups, NSError *error))completionHandler;
+                   completionHandler:(void (^)(NSArray *membershipGroups, NSError *error))completionHandler;
 
-- (void)fetchFilesForUserId:(NSString *)userObjectID
-                completionHandler:(void (^)(NSArray *files, NSError *error))completionHandler;
+
 @end
 
 // *********************************************************

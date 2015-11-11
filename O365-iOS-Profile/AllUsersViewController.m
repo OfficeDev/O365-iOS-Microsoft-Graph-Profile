@@ -9,16 +9,12 @@
 #import "UserViewController.h"
 #import "AuthenticationManager.h"
 
-//ENTER: Provide your organization name here
-static NSString * const ORGANIZATION_NAME           = @"ENTER_YOUR_ORG_NAME_HERE";
-
 //The root view controller that displays all the users in the organization
 @implementation AllUsersViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = ORGANIZATION_NAME;
     
     self.unifiedEndpointClient = [[O365UnifiedEndpointOperations alloc] init];
     
