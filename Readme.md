@@ -12,7 +12,7 @@ To run the Office 365 Profile sample, you need the following:
 
 
 * [Xcode](https://developer.apple.com/) from Apple.
-* An Office 365 account. You can get an Office 365 account by signing up for an [Office 365 Developer site](http://msdn.microsoft.com/en-us/library/office/fp179924.aspx). This will give you access to the APIs that you can use to create apps that target Office 365 data.
+* An Office 365 account. You can get an Office 365 account by signing up for an [Office 365 Developer site](http://msdn.microsoft.com/library/office/fp179924.aspx). This will give you access to the APIs that you can use to create apps that target Office 365 data.
 * A Microsoft Azure tenant to register your application. Azure Active Directory provides identity services that applications use for authentication and authorization. A trial subscription can be acquired here: [Microsoft Azure](https://account.windowsazure.com/SignUp).
 
 **Important**: You will also need to ensure your Azure subscription is bound to your Office 365 tenant. To do this, see the Adding a new directory section in the Active Directory team's blog post, [Creating and Managing Multiple Windows Azure Active Directories](http://blogs.technet.com/b/ad/archive/2013/11/08/creating-and-managing-multiple-windows-azure-active-directories.aspx). You can also read [Set up Azure Active Directory access for your Developer Site](http://msdn.microsoft.com/office/office365/howto/setup-development-environment#bk_CreateAzureSubscription) for more information.
@@ -109,7 +109,7 @@ This implements all of the custom cells used by the controllers in this sample t
 
 ## Questions and comments
 
-We'd love to get your feedback on the Office 365 Profile sample. You can send your feedback to us in the [Issues](https://github.com/OfficeDev/O365-iOS-Profile) section of this repository. <br>
+We'd love to get your feedback on the Office 365 Profile sample. You can send your feedback to us in the [Issues](https://github.com/OfficeDev/O365-iOS-Microsoft-Graph-Profile/Issues) section of this repository. <br>
 Questions about Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+API). 
 Make sure that your questions are tagged with [Office365] and [API].
 
