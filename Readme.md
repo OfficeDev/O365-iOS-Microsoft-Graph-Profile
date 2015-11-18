@@ -1,6 +1,6 @@
 
 #Office 365 Profile Sample for iOS#
-[![Build Status](https://travis-ci.org/OfficeDev/O365-iOS-Profile.svg)](https://travis-ci.org/OfficeDev/O365-iOS-Profile)
+[![Build Status](https://travis-ci.org/OfficeDev/O365-iOS-Microsoft-Graph-Profile.svg?branch=master)](https://travis-ci.org/OfficeDev/O365-iOS-Microsoft-Graph-Profile)
 
 This sample uses Microsoft Graph (previously called Office 365 unified API) to fetch the user directory and user profile data from various services like Active Directory, SharePoint, and OneDrive, and then displays them in a simple user interface.
 
@@ -62,7 +62,7 @@ Note: You should receive confirmation that these dependencies have been added to
 7.	Select the arrow icon on the lower-right corner of the page.
 8.	On the Application information page, specify a Redirect URI, for this example, you can specify http://localhost/o365iosprofile, and then select the check box in the lower-right hand corner of the page. Remember this value for the section **Get the ClientID and RedirectUri into the project**.
 9.	Once the application has been successfully added, you will be taken to the quick start page for the application. Select Configure in the top menu.
-10.	Under **permissions to other applications**, select **Microsoft Graph API** and add the following permissions: **Read items in all site collections**, **Read all users' basic profiles**, and **Sign in and read user profile**.
+10.	Under **permissions to other applications**, select **Microsoft Graph** and add the following permissions: **Read items in all site collections**, **Read all users' basic profiles**, and **Sign in and read user profile**.
 11.	Copy the value specified for **Client ID** on the **Configure** page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
 12.	Select **Save** in the bottom menu.
 
