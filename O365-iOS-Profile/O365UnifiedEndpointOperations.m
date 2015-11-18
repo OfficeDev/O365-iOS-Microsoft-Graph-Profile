@@ -42,7 +42,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
 
 //Fetches all the users from the Active Directory
 - (void)fetchAllUsersWithCompletionHandler:(void (^)(NSArray *, NSError *)) completionHandler {
-    
+
     AuthenticationManager *authenticationManager = [AuthenticationManager sharedInstance];
     
     [authenticationManager acquireAuthTokenWithResourceId:_resourceID
