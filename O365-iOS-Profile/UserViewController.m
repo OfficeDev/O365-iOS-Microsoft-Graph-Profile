@@ -11,8 +11,6 @@
 #import "DirectReportCell.h"
 #import "ManagerInfo.h"
 #import "MembershipCell.h"
-#import "File.h"
-#import "FileCell.h"
 #import "User.h"
 
 typedef NS_ENUM(NSUInteger, UserViewControllerSection) {
@@ -20,13 +18,9 @@ typedef NS_ENUM(NSUInteger, UserViewControllerSection) {
     UserViewControllerSectionManager,
     UserViewControllerSectionDirectReports, 
     UserViewControllerSectionMembershipInfo,
-    UserViewControllerSectionFiles
 };
 
-static const NSUInteger kNumberOfSections = 5;
-
-//ENTER: Provide your organization name here
-static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
+static const NSUInteger kNumberOfSections = 4;
 
 
 //This is view controller that displays the profile for the selected or current user
@@ -40,8 +34,6 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
     self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    self.title = ORGANIZATION_NAME;
-
     // We want to go back to the All Users view from the profile page
     // So change the back button to cancel and add an event handler
     // to override the default behavior of the Back button
@@ -69,38 +61,39 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
     [self fetchManager];
     [self fetchDirectReports];
     [self fetchMembershipGroups];
-    [self fetchFiles];
+}
+
+- (BOOL)handleErrors:(NSError *)error {
+    
+    if (!error) {
+        return NO;
+    }
+    
+    NSLog(@"%@", [error localizedDescription]);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:@"Error has occurred. Check log for more details"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Close"
+                                                  style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert
+                           animated:YES completion:nil];
+    });
+    return YES;
 }
 
 - (void)fetchBasicProfile
 {
-    NSLog(@"========");
-    
     [self.unifiedEndpointClient fetchBasicUserInfoForUserId:self.user.objectId
                        completionHandler:^(BasicUserInfo *basicUserInfo, NSError *error) {
-                           dispatch_async(dispatch_get_main_queue(), ^{
-                               
-                               if (error)
-                               {
-                                   NSLog(@"Error fetching basic user info");
-                                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                   message:@"Error fetching basic user info. Check the log for errors."
-                                                                                  delegate:self
-                                                                         cancelButtonTitle:@"OK"
-                                                                         otherButtonTitles:nil];
-                                   [alert show];
-                                   return;
- 
-                               }
-                               if (!basicUserInfo) {
-                                   NSLog(@"Basic user info is empty");
-                                   return;
-                               }
-                               
-                               self.basicUserInfo = basicUserInfo;
-                          
-                               
-                           });
+                           
+                           if ([self handleErrors:error]) {
+                               return;
+                           }
+                           self.basicUserInfo = basicUserInfo;
+
                        }];
     
 }
@@ -110,27 +103,11 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
 {
     [self.unifiedEndpointClient fetchThumbnailForUserId:self.user.objectId
                               completionHandler:^(UIImage *image, NSError *error) {
-                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                      if (error)
-                                      {
-                                          NSLog(@"Error fetching thumbnail photo");
-                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                          message:error.description
-                                                                                         delegate:self
-                                                                                cancelButtonTitle:@"OK"
-                                                                                otherButtonTitles:nil];
-                                          [alert show];
-                                          return;
-                                          
-                                      }
-                                      
-                                      if (!image) {
-                                          NSLog(@"Thumbnail photo is not available for this user.");
+
+                                      if ([self handleErrors:error]) {
                                           return;
                                       }
-                                      
                                       self.thumbnailPhoto= image;
-                                  });
                               }];
     
     
@@ -140,30 +117,11 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
 {
     [self.unifiedEndpointClient fetchHireDateForUserId:self.user.objectId
                              completionHandler:^(NSString *hireDate, NSError *error) {
-                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                     
-                                     if (error)
-                                     {
-                                         NSLog(@"Error fetching hire date");
-                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                         message:error.description
-                                                                                        delegate:self
-                                                                               cancelButtonTitle:@"OK"
-                                                                               otherButtonTitles:nil];
-                                         [alert show];
-                                         return;
-                                         
-                                     }
-                                     
-                                     if (!hireDate) {
-                                         NSLog(@"Hire date is not available for this user.");
+
+                                     if ([self handleErrors:error]) {
                                          return;
                                      }
-                                    
-                                     
                                      self.hireDate = hireDate;
-                                     
-                                 });
                              }];
     
 }
@@ -172,65 +130,29 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
 {
     [self.unifiedEndpointClient fetchTagsForUserId:self.user.objectId
                          completionHandler:^(NSArray *tags, NSError *error) {
-                             dispatch_async(dispatch_get_main_queue(), ^{
-                                 if (error)
-                                 {
-                                     NSLog(@"Error fetching tags");
-                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                     message:error.description
-                                                                                    delegate:self
-                                                                           cancelButtonTitle:@"OK"
-                                                                           otherButtonTitles:nil];
-                                     [alert show];
-                                     return;
-                                     
-                                 }
-                                 
-                                 if (!tags) {
-                                     NSLog(@"Tags are not available for this user.");
+
+                                 if ([self handleErrors:error]) {
                                      return;
                                  }
-                                 
+      
                                  NSMutableString *tagString = [[NSMutableString alloc] init];
-                                 for (NSObject * obj in tags)
-                                 {
+                                 for (NSObject * obj in tags) {
                                      [tagString appendString:[obj description]];
                                  }
-                                 NSLog(@"The concatenated #tags string is %@", tagString);
-                                 
                                  self.tags= tagString;
-                                 
-                             });
+
                          }];
-    
 }
 
 - (void)fetchManager
 {
     [self.unifiedEndpointClient fetchManagerInfoForUserId:self.user.objectId
                                 completionHandler:^(ManagerInfo *managerInfo, NSError *error) {
-                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                        if (error)
-                                        {
-                                            NSLog(@"Error fetching manager info");
-                                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                            message:error.description
-                                                                                           delegate:self
-                                                                                  cancelButtonTitle:@"OK"
-                                                                                  otherButtonTitles:nil];
-                                            [alert show];
-                                            return;
-                                            
-                                        }
-                                        
-                                        if (!managerInfo) {
-                                            NSLog(@"This user does not have a manager or there was an error fetching this info.");
+
+                                        if ([self handleErrors:error]) {
                                             return;
                                         }
-                                        
                                         self.manager = managerInfo;
-                                        
-                                    });
                                 }];
     
 }
@@ -239,26 +161,12 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
 {
     [self.unifiedEndpointClient fetchDirectReportsForUserId:self.user.objectId
                                   completionHandler:^(NSArray *directReports, NSError *error) {
-                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                          if (error)
-                                          {
-                                              NSLog(@"Error fetching manager info");
-                                              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                              message:error.description
-                                                                                             delegate:self
-                                                                                    cancelButtonTitle:@"OK"
-                                                                                    otherButtonTitles:nil];
-                                              [alert show];
-                                              return;
-                                              
-                                          }
-                                          
-                                          if (!directReports || directReports.count ==0) {
-                                              NSLog(@"This user does not have direct reports or there was an error fetching this info.");
-                                              return;
-                                          }
-                                          self.directReports = directReports;
-                                      });
+                                      if ([self handleErrors:error]) {
+                                          return;
+                                      }
+                                      
+                                      self.directReports = directReports;
+                                      
                                   }];
     
 }
@@ -267,128 +175,69 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
 {
     [self.unifiedEndpointClient fetchMembershipInfoForUserId:self.user.objectId
                                    completionHandler:^(NSArray *membershipGroups, NSError *error) {
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           if (error)
-                                           {
-                                               NSLog(@"Error fetching manager info");
-                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                               message:error.description
-                                                                                              delegate:self
-                                                                                     cancelButtonTitle:@"OK"
-                                                                                     otherButtonTitles:nil];
-                                               [alert show];
-                                               return;
-                                               
-                                           }
-                                           
-                                           if (!membershipGroups || membershipGroups.count ==0) {
-                                               NSLog(@"This user is not a member of any group or there was an error fetching this info.");
-                                               return;
-                                           }
-                                           self.membershipGroups = membershipGroups;
-                                       });
+                                       if ([self handleErrors:error]) {
+                                           return;
+                                       }
+                                       self.membershipGroups = membershipGroups;
+                                       
                                    }];
     
 }
 
 
-- (void)fetchFiles
-{
-    [self.unifiedEndpointClient fetchFilesForUserId:self.user.objectId
-                          completionHandler:^(NSArray *files, NSError *error) {
-                              dispatch_async(dispatch_get_main_queue(), ^{
-                                  if (error)
-                                  {
-                                      NSLog(@"Error fetching manager info");
-                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                      message:error.description
-                                                                                     delegate:self
-                                                                            cancelButtonTitle:@"OK"
-                                                                            otherButtonTitles:nil];
-                                      [alert show];
-                                      return;
-                                      
-                                  }
-                                  
-                                  if (!files || files.count ==0) {
-                                      NSLog(@"This user does not have any files shared with the current user or there was an error fetching this info.");
-                                      return;
-                                  }
-                                  self.files = files;
-                              });
-                          }];
-    
-}
-
 
 #pragma mark - Properties
 
 // When properties are set, reload the table cell
+- (void)performReloadOnIndex:(NSNumber *)index {
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:[index intValue]]
+                  withRowAnimation:UITableViewRowAnimationNone];
+}
 
 - (void)setBasicUserInfo:(BasicUserInfo *)basicUserInfo
 {
     _basicUserInfo = basicUserInfo;
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:UserViewControllerSectionBasicUserInfo]
-                  withRowAnimation:UITableViewRowAnimationNone];
+    [self performSelectorOnMainThread:@selector(performReloadOnIndex:) withObject:@(UserViewControllerSectionBasicUserInfo) waitUntilDone:NO];
 }
 
 - (void)setThumbnailPhoto:(UIImage *)thumbnailPhoto
 {
     _thumbnailPhoto = thumbnailPhoto;
     
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:UserViewControllerSectionBasicUserInfo]
-                  withRowAnimation:UITableViewRowAnimationNone];
+    [self performSelectorOnMainThread:@selector(performReloadOnIndex:) withObject:@(UserViewControllerSectionBasicUserInfo) waitUntilDone:NO];
 }
 
 - (void)setHireDate:(NSString *)hireDate
 {
     _hireDate = hireDate;
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:UserViewControllerSectionBasicUserInfo]
-                  withRowAnimation:UITableViewRowAnimationNone];
+    [self performSelectorOnMainThread:@selector(performReloadOnIndex:) withObject:@(UserViewControllerSectionBasicUserInfo) waitUntilDone:NO];
 }
 
 - (void)setTags:(NSString *)tags
 {
     _tags = tags;
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:UserViewControllerSectionBasicUserInfo]
-                  withRowAnimation:UITableViewRowAnimationNone];
+        [self performSelectorOnMainThread:@selector(performReloadOnIndex:) withObject:@(UserViewControllerSectionBasicUserInfo) waitUntilDone:NO];
 }
 
 - (void)setManager:(ManagerInfo *)manager
 {
     _manager = manager;
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:UserViewControllerSectionManager]
-                  withRowAnimation:UITableViewRowAnimationNone];
+    [self performSelectorOnMainThread:@selector(performReloadOnIndex:) withObject:@(UserViewControllerSectionManager) waitUntilDone:NO];
 }
 
 - (void)setDirectReports:(NSArray *)directReports
 {
     _directReports = [directReports copy];
     
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:UserViewControllerSectionDirectReports]
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self performSelectorOnMainThread:@selector(performReloadOnIndex:) withObject:@(UserViewControllerSectionDirectReports) waitUntilDone:NO];
 }
 
 - (void)setMembershipGroups:(NSArray *)membershipGroups
 {
     _membershipGroups = [membershipGroups copy];
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:UserViewControllerSectionMembershipInfo]
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
-}
 
-- (void)setFiles:(NSArray *)files
-{
-    _files = [files copy];
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:UserViewControllerSectionFiles]
-                  withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self performSelectorOnMainThread:@selector(performReloadOnIndex:) withObject:@(UserViewControllerSectionMembershipInfo) waitUntilDone:NO];
 }
-
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -410,9 +259,6 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
             break;
         case UserViewControllerSectionMembershipInfo:
             return self.membershipGroups.count;
-            break;
-        case UserViewControllerSectionFiles:
-            return self.files.count;
             break;
     }
     
@@ -458,15 +304,6 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
             cell = membershipCell;
             break;
         }
-        case UserViewControllerSectionFiles: {
-            FileCell *fileCell = [self.tableView dequeueReusableCellWithIdentifier:@"FileCell"];
-            
-            [self configureFileCell:fileCell
-                               forIndexPath:indexPath];
-            
-            cell = fileCell;
-            break;
-        }
     }
     
     return cell;
@@ -487,9 +324,6 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
             break;
         case UserViewControllerSectionMembershipInfo:
             return @"Membership";
-            break;
-        case UserViewControllerSectionFiles:
-            return @"Files shared with me";
             break;
     }
     
@@ -536,15 +370,6 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
     
 }
 
-- (void)configureFileCell:(FileCell *)cell
-                    forIndexPath:(NSIndexPath *)indexPath
-{
-        File *file = self.files[indexPath.row];
-    
-        cell.fileNameLabel.text = file.fileName;
-        cell.modifiedByLabel.text = file.lastModifiedByDisplayName;
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -577,19 +402,7 @@ static NSString * const ORGANIZATION_NAME           = @"Patsoldemo4";
         
     }
     
-    else if ([segue.identifier isEqualToString:@"ShowLastModifiedByUser"]) {
-        UserViewController *userViewController = segue.destinationViewController;
-        NSIndexPath *selectedIndexPath = [self.tableView indexPathForCell:sender];
-        File *file = self.files[selectedIndexPath.row];
-        
-        
-        User *selectedUser = [[User alloc] initWithId:file.lastModifiedByObjectID
-                                          displayName:file.lastModifiedByDisplayName
-                                             jobTitle:nil];
-        
-        userViewController.user = selectedUser;
-        
-    }
+
 }
 
 

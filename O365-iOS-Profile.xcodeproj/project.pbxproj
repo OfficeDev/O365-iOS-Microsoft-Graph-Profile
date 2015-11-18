@@ -21,7 +21,6 @@
 		95803E5E1AE80AA400FF8BFB /* ManagerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 95803E581AE80AA400FF8BFB /* ManagerInfo.m */; };
 		95803E5F1AE80AA400FF8BFB /* DirectReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 95803E5A1AE80AA400FF8BFB /* DirectReport.m */; };
 		95803E601AE80AA400FF8BFB /* MembershipGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 95803E5C1AE80AA400FF8BFB /* MembershipGroup.m */; };
-		95803E631AE80AAD00FF8BFB /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 95803E621AE80AAD00FF8BFB /* File.m */; };
 		95803E711AE80ACF00FF8BFB /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95803E661AE80ACF00FF8BFB /* UserCell.m */; };
 		95803E721AE80ACF00FF8BFB /* GeneralUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95803E681AE80ACF00FF8BFB /* GeneralUserInfoCell.m */; };
 		95803E731AE80ACF00FF8BFB /* ManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95803E6A1AE80ACF00FF8BFB /* ManagerCell.m */; };
@@ -73,8 +72,6 @@
 		95803E5A1AE80AA400FF8BFB /* DirectReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectReport.m; sourceTree = "<group>"; };
 		95803E5B1AE80AA400FF8BFB /* MembershipGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MembershipGroup.h; sourceTree = "<group>"; };
 		95803E5C1AE80AA400FF8BFB /* MembershipGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MembershipGroup.m; sourceTree = "<group>"; };
-		95803E611AE80AAD00FF8BFB /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
-		95803E621AE80AAD00FF8BFB /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
 		95803E651AE80ACF00FF8BFB /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		95803E661AE80ACF00FF8BFB /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		95803E671AE80ACF00FF8BFB /* GeneralUserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralUserInfoCell.h; sourceTree = "<group>"; };
@@ -219,8 +216,6 @@
 				95803E5A1AE80AA400FF8BFB /* DirectReport.m */,
 				95803E5B1AE80AA400FF8BFB /* MembershipGroup.h */,
 				95803E5C1AE80AA400FF8BFB /* MembershipGroup.m */,
-				95803E611AE80AAD00FF8BFB /* File.h */,
-				95803E621AE80AAD00FF8BFB /* File.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -265,6 +260,7 @@
 				95803E141AE72AD400FF8BFB /* Frameworks */,
 				95803E151AE72AD400FF8BFB /* Resources */,
 				035F0816FEBD94E92312901B /* Copy Pods Resources */,
+				4E781CDFBEFD30051D5A0660 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -381,6 +377,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		4E781CDFBEFD30051D5A0660 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-O365-iOS-Profile/Pods-O365-iOS-Profile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -394,7 +405,6 @@
 				95803E541AE80A8800FF8BFB /* User.m in Sources */,
 				95803E741AE80ACF00FF8BFB /* DirectReportCell.m in Sources */,
 				95803E461AE809D400FF8BFB /* O365UnifiedEndpointOperations.m in Sources */,
-				95803E631AE80AAD00FF8BFB /* File.m in Sources */,
 				95803E431AE809BF00FF8BFB /* AuthenticationManager.m in Sources */,
 				95803E731AE80ACF00FF8BFB /* ManagerCell.m in Sources */,
 				95803E721AE80ACF00FF8BFB /* GeneralUserInfoCell.m in Sources */,

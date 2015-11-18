@@ -2,20 +2,10 @@
 #Office 365 Profile Sample for iOS#
 [![Build Status](https://travis-ci.org/OfficeDev/O365-iOS-Profile.svg)](https://travis-ci.org/OfficeDev/O365-iOS-Profile)
 
-This sample uses the Office 365 unified endpoint (preview) to fetch the user directory and user profile data from various services like Active Directory, SharePoint, and OneDrive, and then displays them in a simple user interface.
+This sample uses the Office 365 Microsoft Graph, formerly known as the unified API (Preview), to fetch the user directory and user profile data from various services like Active Directory, SharePoint, and OneDrive, and then displays them in a simple user interface.
 
-**Table of contents**
-
-* [Set up your environment](#set-up-your-environment)
-* [Use CocoaPods to import the O365 iOS SDK](#use-cocoapods-to-import-the-o365-ios-sdk)
-* [Register your app with Microsoft Azure](#register-your-app-with-microsoft-azure)
-* [Get the Client ID and Redirect Uri and other constants into the project](#get-the-client-id-and-redirect-uri-into-the-project)
-* [Important Code Files](#code-files)
-* [Questions and comments](#questions-and-comments)
-* [Additional resources](#additional-resources)
-
-
-
+> Note: Try out the [Get started with Office 365 APIs](http://dev.office.com/getting-started/office365apis?platform=option-ios#setup) page which simplifies registration so you can get this sample running faster.
+ 
 ## Set up your environment ##
 
 To run the Office 365 Profile sample, you need the following:
@@ -72,7 +62,7 @@ Note: You should receive confirmation that these dependencies have been added to
 7.	Select the arrow icon on the lower-right corner of the page.
 8.	On the Application information page, specify a Redirect URI, for this example, you can specify http://localhost/o365iosprofile, and then select the check box in the lower-right hand corner of the page. Remember this value for the section **Get the ClientID and RedirectUri into the project**.
 9.	Once the application has been successfully added, you will be taken to the quick start page for the application. Select Configure in the top menu.
-10.	Under **permissions to other applications**, select Office 365 unified API (preview) and add the following permissions: **Read all user's basic profiles**, **Read user's files** and **Read items in all site collections**.
+10.	Under **permissions to other applications**, select **Microsoft Graph API** and add the following permissions: **Read items in all site collections**, **Read all users' basic profiles**, and **Sign in and read user profile**.
 11.	Copy the value specified for **Client ID** on the **Configure** page. Remember this value for the section **Getting the ClientID and RedirectUri into the project**.
 12.	Select **Save** in the bottom menu.
 
@@ -83,33 +73,29 @@ Finally you'll need to add the Client ID and Redirect Uri you recorded from the 
 
 Browse the **O365-iOS-Profile** project directory and open up the workspace (O365-iOS-Profile.xcworkspace). In the **AuthenticationManager.m** file you'll see that the **ClientID** and **RedirectUri** values can be added to the top of the file. Supply the necessary values in this file.
 
-// You will set your application's clientId and redirect URI. You get
-// these when you register your application in Azure AD.
+    // You will set your application's clientId and redirect URI. You get
+    // these when you register your application in Azure AD.
+    
+    static NSString * const REDIRECT_URL_STRING = @"ENTER_REDIRECT_URI_HERE";
 
-static NSString * const REDIRECT_URL_STRING = @"ENTER_REDIRECT_URI_HERE";
-
-static NSString * const CLIENT_ID           = @"ENTER_CLIENT_ID_HERE";
-
+    static NSString * const CLIENT_ID           = @"ENTER_CLIENT_ID_HERE";
 
 Next enter the other constants in the files.
 
-In O365UnifiedEndpointOperations, enter your tenant name, such as x.onmicrosoft.com.
-static NSString * const TENANT_STRING = @"ENTER_YOUR-TENANT_NAME_HERE/";
+In **O365UnifiedEndpointOperations.m**, enter your tenant name, such as x.onmicrosoft.com.
 
-In AllUsersViewController, enter your friendly organization name. This will be displayed as the title.
-static NSString * const ORGANIZATION_NAME           = @"ENTER_YOUR_ORG_NAME_HERE";
-
+    static NSString * const TENANT_STRING = @"ENTER_YOUR-TENANT_NAME_HERE/";
 
 ## Important Code Files
 
 
 **Models**
 
-These domain entities are custom classes that represent the data of the application. All of these classes are immutable.  They wrap the basic entities provided by the Office 365 APIs. 
+These domain entities are custom classes that represent the data of the application. All of these classes are immutable.  They wrap the basic entities provided by Microsoft Graph APIs. 
 
 **Office365 Helpers**
 
-The helpers are the classes that actually communicate with Office 365 by making REST API calls. This architecture decouples the rest of the app from the Office365 APIs.
+The helpers are the classes that actually communicate with Office 365 by making REST API calls. This architecture decouples the rest of the app from Microsoft Graph APIs.
 
 
 **Controllers**
@@ -124,17 +110,14 @@ This implements all of the custom cells used by the controllers in this sample t
 ## Questions and comments
 
 We'd love to get your feedback on the Office 365 Profile sample. You can send your feedback to us in the [Issues](https://github.com/OfficeDev/O365-iOS-Profile) section of this repository. <br>
-Questions about Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+API). Make sure that your questions are tagged with [Office365] and [API].
+Questions about Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+API). 
+Make sure that your questions are tagged with [Office365] and [API].
 
 ## Additional resources
 
-* [Office 365 Connect app for iOS](https://github.com/OfficeDev/O365-iOS-Connect)
-* [Office 365 Code Snippets for iOS](https://github.com/OfficeDev/O365-iOS-Snippets)
-* [Email Peek - An iOS app built using Office 365](https://github.com/OfficeDev/O365-iOS-EmailPeek)
-* [Other Office 365 Profile samples](https://github.com/OfficeDev?utf8=%E2%9C%93&query=Profile)
-* [Office 365 APIs documentation](http://msdn.microsoft.com/office/office365/howto/platform-development-overview)
 * [Office Dev Center](http://dev.office.com/)
-* [Office 365 API code samples and videos](https://msdn.microsoft.com/office/office365/howto/starter-projects-and-code-samples)
+* [Microsoft Graph overview page](https://graph.microsoft.io)
+* [Using CocoaPods](https://guides.cocoapods.org/using/using-cocoapods.html)
 
 ## Copyright
 Copyright (c) 2015 Microsoft. All rights reserved.
