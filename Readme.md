@@ -2,7 +2,7 @@
 #Office 365 Profile Sample for iOS#
 [![Build Status](https://travis-ci.org/OfficeDev/O365-iOS-Profile.svg)](https://travis-ci.org/OfficeDev/O365-iOS-Profile)
 
-This sample uses the Microsoft Graph (previously called Office 365 unified API) to fetch the user directory and user profile data from various services like Active Directory, SharePoint, and OneDrive, and then displays them in a simple user interface.
+This sample uses Microsoft Graph (previously called Office 365 unified API) to fetch the user directory and user profile data from various services like Active Directory, SharePoint, and OneDrive, and then displays them in a simple user interface.
 
 > Note: Try out the [Get started with Office 365 APIs](http://dev.office.com/getting-started/office365apis?platform=option-ios#setup) page which simplifies registration so you can get this sample running faster.
  
@@ -91,11 +91,11 @@ In **O365UnifiedEndpointOperations.m**, enter your tenant name, such as x.onmicr
 
 **Models**
 
-These domain entities are custom classes that represent the data of the application. All of these classes are immutable.  They wrap the basic entities provided by Microsoft Graph APIs. 
+These domain entities are custom classes that represent the data of the application. All of these classes are immutable.  They wrap the basic entities provided by the Microsoft Graph APIs. 
 
 **Office365 Helpers**
 
-The helpers are the classes that actually communicate with Office 365 by making REST API calls. This architecture decouples the rest of the app from Microsoft Graph APIs.
+The helpers are the classes that actually communicate with Office 365 by making REST API calls. This architecture decouples the rest of the app from the Microsoft Graph APIs.
 
 
 **Controllers**
