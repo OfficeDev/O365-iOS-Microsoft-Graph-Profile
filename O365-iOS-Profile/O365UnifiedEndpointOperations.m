@@ -158,7 +158,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration:
                                                                                  config delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
                                         
-                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@", _baseURL, @"users/", userObjectID];
+                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@%@", _baseURL, @"users/", userObjectID, @"?$select=id,displayName,state,country,department,jobTitle,businessPhones,mobilePhone,mail"];
                                             
                                             
                                             NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:requestURL]];
