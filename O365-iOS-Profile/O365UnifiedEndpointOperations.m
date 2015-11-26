@@ -281,7 +281,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
 
                                                                         BasicUserInfo *basicUserInfo = [[BasicUserInfo alloc] initWithId:objectId
-                                                                                        displayName:displayName
+                                                                                                                             displayName:displayName
                                                                                                                                     state:state
                                                                                                                                  country:country
                                                                                                                               department:department
