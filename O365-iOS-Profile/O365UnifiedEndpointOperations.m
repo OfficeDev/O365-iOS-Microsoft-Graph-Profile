@@ -92,9 +92,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                             
                                                                             NSString *objectId;
                                                                             
-                                                                            if(userData[@"objectId"])
+                                                                            if(userData[@"id"])
                                                                             {
-                                                                                objectId = userData[@"objectId"];
+                                                                                objectId = userData[@"id"];
                                                                             }
                                                                             else
                                                                             {
@@ -186,9 +186,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
                                                                         NSString *objectId;
                                                                         
-                                                                        if(jsonPayload[@"objectId"])
+                                                                        if(jsonPayload[@"id"])
                                                                         {
-                                                                            objectId = jsonPayload[@"objectId"];
+                                                                            objectId = jsonPayload[@"id"];
                                                                         }
                                                                         else
                                                                         {
@@ -475,9 +475,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
         
                                                                         NSString *objectId;
                                                                         
-                                                                        if(jsonPayload[@"objectId"] && jsonPayload[@"displayName"] != [NSNull null])
+                                                                        if(jsonPayload[@"id"] && jsonPayload[@"id"] != [NSNull null])
                                                                         {
-                                                                            objectId = jsonPayload[@"objectId"];
+                                                                            objectId = jsonPayload[@"id"];
                                                                         }
                                                                         else
                                                                         {
@@ -569,9 +569,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                             
                                                                             NSString *objectId;
                                                                             
-                                                                            if(directReportData[@"objectId"] && directReportData[@"objectId"] != [NSNull null])
+                                                                            if(directReportData[@"id"] && directReportData[@"id"] != [NSNull null])
                                                                             {
-                                                                                objectId = directReportData[@"objectId"];
+                                                                                objectId = directReportData[@"id"];
                                                                             }
                                                                             else
                                                                             {
@@ -666,9 +666,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                             
                                                                             NSString *objectId;
                                                                             
-                                                                            if(membershipGroupData[@"objectId"] && membershipGroupData[@"objectId"] != [NSNull null])
+                                                                            if(membershipGroupData[@"id"] && membershipGroupData[@"id"] != [NSNull null])
                                                                             {
-                                                                                objectId = membershipGroupData[@"objectId"];
+                                                                                objectId = membershipGroupData[@"id"];
                                                                             }
                                                                             else
                                                                             {
