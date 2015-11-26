@@ -252,9 +252,15 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
                                                                         NSString *phone;
                                                                         
-                                                                        if(jsonPayload[@"telephoneNumber"] && jsonPayload[@"telephoneNumber"] != [NSNull null])
+                                                                        if(jsonPayload[@"businessPhones"] && jsonPayload[@"businessPhones"] != [NSNull null])
                                                                         {
-                                                                            phone = jsonPayload[@"telephoneNumber"];
+                                                                            NSArray *businessPhones = jsonPayload[@"businessPhones"];
+                                                                            phone = businessPhones.firstObject;
+                                                                        }
+
+                                                                        if (phone.length == 0 && jsonPayload[@"mobilePhone"] && jsonPayload[@"mobilePhone"] != [NSNull null])
+                                                                        {
+                                                                            phone = jsonPayload[@"mobilePhone"];
                                                                         }
                                                                         else
                                                                         {
