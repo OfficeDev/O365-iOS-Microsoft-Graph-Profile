@@ -1,5 +1,5 @@
 
-#Office 365 Profile Sample for iOS#
+#Office 365 Microsoft Graph Profile Sample for iOS#
 [![Build Status](https://travis-ci.org/OfficeDev/O365-iOS-Microsoft-Graph-Profile.svg?branch=master)](https://travis-ci.org/OfficeDev/O365-iOS-Microsoft-Graph-Profile)
 
 This sample uses Microsoft Graph (previously called Office 365 unified API) to fetch the user directory and user profile data from various services like Active Directory, SharePoint, and OneDrive, and then displays them in a simple user interface.
