@@ -92,9 +92,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                             
                                                                             NSString *objectId;
                                                                             
-                                                                            if(userData[@"objectId"])
+                                                                            if(userData[@"id"])
                                                                             {
-                                                                                objectId = userData[@"objectId"];
+                                                                                objectId = userData[@"id"];
                                                                             }
                                                                             else
                                                                             {
@@ -158,7 +158,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration:
                                                                                  config delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
                                         
-                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@", _baseURL, @"users/", userObjectID];
+                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@%@", _baseURL, @"users/", userObjectID, @"?$select=id,displayName,state,country,department,jobTitle,businessPhones,mobilePhone,mail"];
                                             
                                             
                                             NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:requestURL]];
@@ -186,9 +186,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
                                                                         NSString *objectId;
                                                                         
-                                                                        if(jsonPayload[@"objectId"])
+                                                                        if(jsonPayload[@"id"])
                                                                         {
-                                                                            objectId = jsonPayload[@"objectId"];
+                                                                            objectId = jsonPayload[@"id"];
                                                                         }
                                                                         else
                                                                         {
@@ -252,9 +252,15 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
                                                                         NSString *phone;
                                                                         
-                                                                        if(jsonPayload[@"telephoneNumber"] && jsonPayload[@"telephoneNumber"] != [NSNull null])
+                                                                        if(jsonPayload[@"businessPhones"] && jsonPayload[@"businessPhones"] != [NSNull null])
                                                                         {
-                                                                            phone = jsonPayload[@"telephoneNumber"];
+                                                                            NSArray *businessPhones = jsonPayload[@"businessPhones"];
+                                                                            phone = businessPhones.firstObject;
+                                                                        }
+
+                                                                        if (phone.length == 0 && jsonPayload[@"mobilePhone"] && jsonPayload[@"mobilePhone"] != [NSNull null])
+                                                                        {
+                                                                            phone = jsonPayload[@"mobilePhone"];
                                                                         }
                                                                         else
                                                                         {
@@ -275,7 +281,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                         
 
                                                                         BasicUserInfo *basicUserInfo = [[BasicUserInfo alloc] initWithId:objectId
-                                                                                        displayName:displayName
+                                                                                                                             displayName:displayName
                                                                                                                                     state:state
                                                                                                                                  country:country
                                                                                                                               department:department
@@ -351,7 +357,7 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                             NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration:
                                                                                  config delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
                                             
-                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@%@", _baseURL, @"users/", userObjectID, @"?$select=HireDate"];
+                                            NSString *requestURL = [NSString stringWithFormat:@"%@%@%@%@", _baseURL, @"users/", userObjectID, @"?$select=hireDate"];
                                             
                                             NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:requestURL]];
                                             
@@ -475,9 +481,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
         
                                                                         NSString *objectId;
                                                                         
-                                                                        if(jsonPayload[@"objectId"] && jsonPayload[@"displayName"] != [NSNull null])
+                                                                        if(jsonPayload[@"id"] && jsonPayload[@"id"] != [NSNull null])
                                                                         {
-                                                                            objectId = jsonPayload[@"objectId"];
+                                                                            objectId = jsonPayload[@"id"];
                                                                         }
                                                                         else
                                                                         {
@@ -569,9 +575,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                             
                                                                             NSString *objectId;
                                                                             
-                                                                            if(directReportData[@"objectId"] && directReportData[@"objectId"] != [NSNull null])
+                                                                            if(directReportData[@"id"] && directReportData[@"id"] != [NSNull null])
                                                                             {
-                                                                                objectId = directReportData[@"objectId"];
+                                                                                objectId = directReportData[@"id"];
                                                                             }
                                                                             else
                                                                             {
@@ -666,9 +672,9 @@ static NSString * const RESOURCE_ID_STRING = @"https://graph.microsoft.com/";
                                                                             
                                                                             NSString *objectId;
                                                                             
-                                                                            if(membershipGroupData[@"objectId"] && membershipGroupData[@"objectId"] != [NSNull null])
+                                                                            if(membershipGroupData[@"id"] && membershipGroupData[@"id"] != [NSNull null])
                                                                             {
-                                                                                objectId = membershipGroupData[@"objectId"];
+                                                                                objectId = membershipGroupData[@"id"];
                                                                             }
                                                                             else
                                                                             {
